@@ -58,14 +58,14 @@ jobs:
           name: ${{matrix.service}}-api-docs
           path: services/${{matrix.service}}/apidocs
 
-    build_image:
+  build_image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         service: [tasks-api, title-normalizer] # ${{matrix.service}}
     steps:
-      - uses: actions/checkout@v7
-      - run: docker build -t  ${{matrix.service}} services/ ${{matrix.service}}
+       - uses: actions/checkout@v7
+       - run: docker build -t  ${{matrix.service}} services/ ${{matrix.service}}
 
   deploy:
     needs: [run_tests, generate_api_docs]
