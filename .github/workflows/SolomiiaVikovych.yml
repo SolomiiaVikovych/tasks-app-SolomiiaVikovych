@@ -43,6 +43,14 @@ jobs:
     strategy:
       matrix:
         service: [tasks-api, title-normalizer] # ${{matrix.service}}
+  build_image:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [tasks-api, title-normalizer] # ${{matrix.service}}
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t  ${{matrix.service}} services/ ${{matrix.service}}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -98,3 +106,4 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v5
+
